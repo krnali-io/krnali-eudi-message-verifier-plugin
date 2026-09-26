@@ -1,0 +1,10 @@
+.env
+.env.*
+!.env.example
+secrets/
+bin/
+coverage.out
+.DS_Store
+node_modules/
+test-results/
+__pycache__/

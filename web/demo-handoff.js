@@ -1,0 +1,5 @@
+"use strict";
+const button=document.querySelector("#verify"),status=document.querySelector("#verification-status");
+function countdown(){const seconds=Math.max(0,Math.ceil((new Date(document.body.dataset.expires)-new Date())/1000));document.querySelector("#countdown").textContent=Math.floor(seconds/60)+":"+String(seconds%60).padStart(2,"0")+" left";if(!seconds){button.disabled=true;status.textContent="This demo link has expired. Create a new one.";}}
+countdown();setInterval(countdown,1000);
+button.addEventListener("click",async()=>{button.disabled=true;status.textContent="Opening the sample wallet…";try{const r=await fetch(document.body.dataset.start,{method:"POST",cache:"no-store"});if(!r.ok)throw Error(r.status===410?"This demo link has been used or expired. Create a new one.":"The demo could not start. Please try again.");const data=await r.json();const next=new URL(data.authorization_request_uri);if(next.origin!==location.origin||!/^\/demo\/wallet\/[A-Za-z0-9_-]{43}$/.test(next.pathname)||next.search||next.hash)throw Error("Invalid demo destination.");location.assign(next.href);}catch(e){status.textContent=e.message;}});

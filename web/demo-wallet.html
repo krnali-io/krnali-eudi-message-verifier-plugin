@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Sample wallet · krnali eudi message verifier plugin demo</title><link rel="stylesheet" href="/assets/app.css"><script src="/assets/demo-wallet.js" defer></script>{{template "brand-head" .}}</head>
+<body class="recipient-page">{{template "mode-banner" .}}
+<main class="handoff-card demo-wallet"><div class="brand">{{template "brand" .}}</div><p class="eyebrow">SAMPLE WALLET</p><h1>You choose<br>what to share.</h1>
+<p class="subtitle">This simulates the choice a customer would make in their wallet. No app or real credentials are needed.</p>
+<div class="context-box"><span class="hint">SAMPLE IDENTITY</span><strong>Alex Demo</strong><span>{{if .Age}}Requested: whether you are 18 or older{{else}}Requested: given name and family name{{end}}</span></div>
+<form id="demo-choice" method="post" action="{{.Action}}"><button class="primary full" name="outcome" value="share">{{if .Age}}Share sample: over 18{{else}}Share Alex Demo{{end}} <span>↗</span></button>
+{{if .Age}}<button class="secondary full demo-choice" name="outcome" value="under18">Try sample: under 18</button>{{else}}<button class="secondary full demo-choice" name="outcome" value="different">Share a different name: Sam Sample</button>{{end}}
+<button class="text-button full demo-choice" name="outcome" value="decline">Decline to share</button></form><p id="choice-status" role="status"></p><p class="footnote">Every outcome on this page is simulated.</p></main>
+<footer class="recipient-footer">krnali eudi message verifier plugin · Demo</footer></body></html>

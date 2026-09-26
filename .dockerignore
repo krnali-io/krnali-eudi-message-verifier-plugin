@@ -1,0 +1,7 @@
+.git
+.env*
+secrets
+bin
+node_modules
+test-results
+docs
