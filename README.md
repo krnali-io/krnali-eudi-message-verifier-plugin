@@ -28,6 +28,12 @@ presentation from an installed phone wallet remains pending. The iPhone
 TestFlight option is documented as a candidate, not confirmed compatible.
 See [phone acceptance](docs/phone-test-setup.md).
 
+On a phone, prepare the request and tap **Open wallet**. On a computer, prepare
+the request and scan its QR code using the wallet's scanner. Both use the same
+verifier request. A QR scan can bypass a browser handoff problem; it cannot fix
+wallet protocol or certificate-trust incompatibility. Use a fresh request if
+switching devices after starting.
+
 ## Features
 
 - Name verification, expected-name comparison, and SD-JWT/ISO mdoc alternatives.
@@ -95,6 +101,13 @@ Use fictional identities and review your own hosting/logging configuration.
 Normal unit tests use local fixtures. `scripts/check-reference.py` separately
 exercises the pinned reference-verifier container with disposable, untrusted
 test certificates. It does not establish real wallet trust.
+
+`scripts/check-handoff.cjs` checks mobile/desktop QR availability, explicit wallet
+launch, QR failures and terminal cleanup in a browser. Run the loopback fixture
+with `VERIFYLINK_BROWSER_FIXTURE=1 go test ./internal/server -run '^TestBrowserPreview$' -timeout 10m`,
+then run the script with Playwright installed. `PLAYWRIGHT_PATH` can point to the
+module and `CHROME_PATH` to a Chromium executable. These browser checks intercept
+wallet responses; they do not establish native iPhone compatibility.
 
 `scripts/check-eudi-hosted.cjs` is an opt-in browser/protocol check against the
 public EUDI service. It requires a live local test instance, Playwright and a

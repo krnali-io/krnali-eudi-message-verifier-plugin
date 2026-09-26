@@ -42,11 +42,27 @@ credential or raw presentation into a ticket or repository.
 
 ## Connect the message verifier
 
-the message verifier now delegates the name presentation to the official EUDI hosted
+The message verifier now delegates the name presentation to the official EUDI hosted
 verifier. Follow [the live setup page](https://verify.krnali.io/setup), create a
-name request, then open its link on the phone or scan the wallet QR. The phone
-will identify **Web Verifier (PROD)** as the requester. The test presentation is
+name request, then open a fresh link in Safari on iPhone or Chrome on Android.
+Tap **Verify with your EU wallet**, then **Open wallet**. The separate tap lets
+the browser launch the installed wallet directly from a user gesture. For the QR
+route, open the link on a computer, start it there, and scan the displayed code
+using the phone wallet's own scanner. Both options use the exact request URI
+returned by the verifier. The phone will identify **Web Verifier (PROD)** as the requester. The test presentation is
 validated by that official service and returned to our console.
+
+If Open wallet does nothing, the browser-to-app handoff has not completed.
+If the wallet opens only to its home screen, it has not presented the credential.
+The expected next screen identifies the requester and asks permission to share
+the requested name attributes. The holder approves, and the verification page
+and console then receive a result.
+
+A QR scan can bypass a browser handoff problem; it cannot fix unsupported request
+formats or verifier trust. Record the installed Trinsic build number and any
+wallet error. Its compatibility with the official hosted verifier remains
+unconfirmed. Use a fresh request when changing devices after starting: each
+link can start only once. Keep the active page open while approving in the wallet.
 
 A successful holder presentation remains to be recorded. Confirm its actual
 result before recording a promotional walkthrough. Decline and invalid-credential
